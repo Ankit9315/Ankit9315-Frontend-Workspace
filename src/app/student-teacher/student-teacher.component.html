@@ -1,0 +1,78 @@
+<h1 style="text-align: center; margin-top: 7px; text-transform: uppercase;">Students</h1>
+<div style="text-align: end;">
+  
+  <input type="file" id="files" name="Upload CSV" style="visibility:hidden;" (change)="CSVDATA($event)">
+  <label for="files"   style="border: 0px;background-color: rgb(197, 199, 183) ;padding: 5px;margin-bottom: 5px;">Upload from CSV</label>
+
+<!-- <button style="align-items: baseline;" (click)="takeStudent()" style="color:darkgreen">Import Student</button>
+<button style="align-items: baseline;" (click)="giveTeacher()" style="color:darkred">Export Students</button> -->
+<input type="button" value="Export to CSV" style="align-items: baseline;border: 0px;padding: 5px; background-color: rgb(197, 199, 183);margin-left: 5px;" (click)="generateCSV()">
+<input type="button"  value="Add Student" style="align-items: flex-end;border: 0px; padding: 5px;background-color: rgb(197, 199, 183);margin-left: 5px;" (click)="giveStudent()">
+<!-- <button style="align-items: baseline;" (click)="importCSV()">Import Students</button> -->
+</div>
+<table style="align-items: center;" class="table table-bordered">
+    <thead>
+      <tr>
+      <th>Student First Name</th>
+      <th>Student Last Name</th>
+      <th>Date of Birth</th>
+      <th>Mobile Number</th>
+      <th>Email</th>
+      <th>Edit</th>
+      <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of teacherStudent | paginate : {itemsPerPage: size,
+        currentPage: page,
+        totalItems: count}">
+        <td>{{student.student.first_name}}</td>
+        <td>{{student.student.last_name}}</td>
+        <td>{{student.student.date_of_birth}}</td>
+        <td>{{student.student.mobilenumber}}</td>
+        <td>{{student.student.emailid}}</td>
+        <!-- <td><button style="background-color: rgb(255, 114, 33);" (click)="openDialog(student.student.studentuuid)">Message</button></td> -->
+        <td style="text-align: center;"><button (click)="updateStudent(student.student.studentuuid)"  class="btn btn-primary">Edit</button></td>
+        <td style="text-align: center;"><button (click)="deleteRelation(student.student.studentuuid)" class="btn btn-danger">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="d-flex justify-content-center" style="text-align: center;">
+    <ul class="pagination justify-content-center">
+      <li class="page-item">
+        <a class="page-link" tabindex="-1"  style="color:black">
+          <pagination-controls previousLabel="Previous" nextLabel="Next" (pageChange)="onTableDataChange($event)"></pagination-controls>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div [hidden]="hideDiv">
+      <div class="form-group mb-2">
+        <label for="studentuuid">Student : </label>
+        <select #selectStudent (change)="addStudent(selectStudent.value)" style="margin-left: 20px;">
+          <option value="" selected disabled hidden>Select Student</option>
+          <option *ngFor="let student of studentList" [value]="student.studentuuid">{{student.first_name}}({{student.emailid}})</option>
+        </select>
+      </div>
+  </div>
+
+  <!-- <div [hidden]="hideList">
+    <div class="form-group mb-2">
+      <label for="teacheruuid1">Teacher to export : </label>
+      <select #selectTeacher (change)="exportStudent(selectTeacher.value)" style="margin-top: 20px;">
+        <option value="" selected disabled hidden>Select Teacher</option>
+        <option *ngFor="let values of teacherList" [value]="values.teacheruuid">{{values.first_name}}({{values.email}})</option>
+      </select>
+    </div>
+  </div>
+  <div [hidden]="hideTeacher">
+    <div class="form-group mb-2">
+      <label for="teacheruuid2">Teacher To import: </label>
+      <select #selectTeachers (change)="importStudents(selectTeachers.value)" style="margin-top: 20px;">
+        <option value="" selected disabled hidden>Select Teacher</option>
+        <option *ngFor="let rk of teacherList" [value]="rk.teacheruuid">{{rk.first_name}}({{rk.email}})</option>
+      </select>
+    </div>
+  </div> -->

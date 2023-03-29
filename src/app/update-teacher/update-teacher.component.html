@@ -1,0 +1,35 @@
+<div class="container" style="margin-top: 3mm;">
+    <div class="card">
+        <h1 style="text-align: center;">Update Teacher</h1>
+    </div>
+    <div class="card p-4">
+        <form #updateTeacher="ngForm" (ngSubmit)="updatedTeacher(updateTeacher)">
+            <div class="form-group mb-2">
+                <label for="first_name" style="font-size:17px; ">Teacher First Name</label>
+                <input type="text" #first_name="ngModel" (ngModel)="first_name" name="first_name" id="first_name" class="form-control"  placeholder="First Name" value="{{teacher.first_name}}">
+            </div> 
+            <div class="form-group mb-2">
+                <label for="last_name" style="font-size:17px; ">Teacher Last Name</label>
+                <input type="text" #last_name="ngModel" (ngModel)="last_name" name="last_name" id="last_name" class="form-control" placeholder="Last Name" value="{{teacher.last_name}}">
+            </div>
+            <div class="form-group mb-2">
+                <label class="me-2" style="font-size:17px; "> Gender :</label>
+                    <input type="radio" #gender="ngModel" (ngModel)="gender" name="gender" id="male" placeholder="Gender" value="Male" style="margin-left: 50px;" >
+                    <label for="male" class="me-2" style="margin-left: 2px;">Male</label>
+                <!-- <input type="radio" #gender="ngModel" (ngModel)="gender" name="gender" id="male" class="form-control" placeholder="Gender" value="Male"> -->
+                    <input type="radio" #gender="ngModel" (ngModel)="gender" name="gender" id="female"  placeholder="Gender" value="Female" style="margin-left: 50px;">
+                    <label for="female" style="margin-left: 2px;">Female</label>
+            </div>
+            <div class="form-group mb-2" >
+                <label for="mobilenumber" style="font-size:17px; ">Teacher Mobile Number</label>
+                <input type="text" #mobilenumber="ngModel" (ngModel)="mobilenumber" name="mobilenumber" id="mobilenumber" class="form-control" placeholder="Mobile Number" value="{{teacher.mobilenumber}}">
+            </div>
+            <div class="form-group mb-2">
+                <label for="email" style="font-size:17px; ">Teacher Email ID</label>
+                <input type="text" #email="ngModel" (ngModel)="email" name="email" id="email" class="form-control" placeholder="Email" value="{{teacher.email}}">
+            </div>
+            <div class="form-group mb-2">
+                <input type="submit" value="Update Teacher" class="btn btn-primary" style="margin-top: 3mm;">
+            </div>   
+        </form>
+    </div>

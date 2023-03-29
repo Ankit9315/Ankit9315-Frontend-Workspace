@@ -1,0 +1,92 @@
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<!-- <a href="#add-student.component"></a> -->
+<h1 style="text-align: center; margin-top: 7px; text-transform: uppercase;">Students</h1>
+<div style="text-align: right;margin-bottom: 10px;">
+<button (click)="makePdf()" style=" margin-right: 10px;border: 0px ; background-color: rgb(197, 199, 183);">Export to PDF</button>
+<button (click)="generateCSV()" style="border: 0px;background-color: rgb(197, 199, 183);" >Export to CSV</button>
+</div>
+<div #content id="content">
+<table style="align-items: center;" class="table table-bordered" id="my-table">
+    <thead>
+        <tr>
+            <!-- <th>Student UUID</th> -->
+            <th>Student First Name<button style='font-size:6px;margin-left: 5px;border: 0px;vertical-align:middle;' (click) ="sortByCol('first_name')" ><fa-icon [icon]="faAngleDown"></fa-icon></button></th>
+            <th>Student Last Name<button style='font-size:6px;margin-left: 5px;border: 0px;vertical-align:middle;' (click)="sortByCol('last_name')"><fa-icon [icon]="faAngleDown"></fa-icon></button></th>
+            <th>Date of Birth</th>
+            <th>Mobile Number</th>
+            <th>EMail Id</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+      <tbody>
+        <tr *ngFor = "let student of students | paginate : {itemsPerPage: size,
+          currentPage: page,
+          totalItems: count} ">
+            <!-- <td>{{student.studentuuid}}</td> -->
+            <td>{{student.first_name}}</td>
+            <td>{{student.last_name}}</td>
+            <td>{{student.date_of_birth}}</td>
+            <td>{{student.mobilenumber}}</td>
+            <td>{{student.emailid}}</td>
+            <td style="text-align: center;"><button type="button" class="btn btn-primary" (click)="updateStudent(student.studentuuid)">Edit</button></td>
+            <td style="text-align: center;"><button type="button" (click)="deleteStudent(student)" class='btn btn-danger'>Delete</button></td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="d-flex justify-content-center" style="text-align: center;">
+  <ul class="pagination justify-content-center">
+    <li class="page-item">
+      <a class="page-link" tabindex="-1" style="color:black">
+        <pagination-controls previousLabel="Previous" nextLabel="Next" (pageChange)="onTableDataChange($event)"></pagination-controls>
+      </a>
+    </li>
+  </ul>
+</div>
+</div>
+
+<!-- 
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #addStudentForm="ngForm" (ngSubmit)="update(addStudentForm)">
+          <div class="form-group">
+              <label for="first_name">First Name</label>
+              <input type="text"  ngModel name="first_name" id="first_name" class="form-control" placeholder="First Name">
+          </div>
+          <div class="form-group">
+              <label for="last_name">Last Name</label>
+              <input type="text" #last_name (ngModel)="last_name" name="last_name" id="last_name" class="form-control" placeholder="Last Name">
+          </div>
+          <div class="form-group">
+              <label for="date_of_birth">Date Of Birth</label>
+              <input type="text" #date_of_birth (ngModel)="date_of_birth" name="date_of_birth" id="date_of_birth" class="form-control" placeholder="Date Of Birth">
+          </div>
+          <div class="form-group">
+              <label for="mobilenumber">Mobile Number</label>
+              <input type="text" #mobilenumber (ngModel)="mobilenumber" name="mobilenumber" id="mobilenumber" class="form-control" placeholder="Mobile Number">
+          </div>
+          <div class="form-group">
+              <label for="emailid">Email Id</label>
+              <input type="text" #emailid (ngModel)="emailid" name="emailid" id="emailid" class="form-control" placeholder="emailid">
+          </div>
+          <div class="form-group">
+              <input type="submit" value="Add Student" class="btn btn-primary">
+          </div>
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+

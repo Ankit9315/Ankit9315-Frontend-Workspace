@@ -1,0 +1,17 @@
+<h4 style=" color:black;">Student Login</h4>
+<div class="card p-4" style="margin-top: 5px; ">
+    <form #addLoginForm="ngForm" (ngSubmit)="submit(addLoginForm)">
+        <div class="form-group mb-2">
+            <label for="username" style="font-size:17px;margin-bottom: 5px; ">USERNAME</label>
+            <input type="text" #username="ngModel" (ngModel)="username" name="username" id="username" class="form-control"  placeholder="Username">
+        </div> 
+        <div class="form-group mb-2">
+            <label for="password" style="font-size:17px;margin-bottom:5px">PASSWORD</label>
+            <input type="text" #password="ngModel" (ngModel)="password" name="password" id="password" class="form-control" placeholder="Password">
+        </div>
+        
+        <div class="form-group mb-2">
+            <input type="submit" value="LOGIN" class="btn btn-primary" mat-dialog-close [disabled]="isValidUser" style="margin-top: 3mm;" >
+        </div>   
+    </form>
+</div>

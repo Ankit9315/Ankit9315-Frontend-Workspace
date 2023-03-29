@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+
+@import '~ngx-toastr/toastr';
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+/* .container{
+    background-image: url(.\enjoying-his-studies-484286872-735782e8d2144f7496bf9b947bcc1a56.jpg);
+} */
+
+/* .bg{
+    background-image: url(.\enjoying-his-studies-484286872-735782e8d2144f7496bf9b947bcc1a56.jpg);
+    height: 660px; 
+} */

@@ -1,0 +1,12 @@
+<div >
+<h5 *ngIf="student">Reply to : {{student.first_name}}</h5>
+<form #messageForm="ngForm" (ngSubmit)="sendMessage(messageForm)">
+    <div class="form-group mb-2">
+        <label for="message" style="margin-bottom: 10px;">Enter your Message</label>
+        <textarea type="text" maxlength="100" #message="ngModel" (ngModel)="message" name="message" id="message" class="form-control" placeholder="Enter your message">Enter text</textarea>
+    </div>
+    <div class="form-group mb-2">
+        <input type="submit" value="Reply" class="btn btn-primary" style="margin-top: 3mm;" mat-dialog-close>
+    </div> 
+</form>
+</div>

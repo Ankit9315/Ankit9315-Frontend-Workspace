@@ -1,0 +1,78 @@
+<div style="height: 535px; background-color: white;margin-top: 7px;">
+    <h1 *ngIf="student"
+        style="text-align: center; color:black; text-transform: uppercase;">
+        {{student.first_name +" "+ student.last_name}}</h1>
+    <input type="button" value="Compose Message" (click)="showReceiverDialog();">
+    <!-- <h1 *ngIf="student" style="text-align: center; background-color: rgb(61, 39, 112); color: rgb(227, 219, 236); text-transform: uppercase;"> {{student.first_name}}</h1> -->
+    <!-- <div class="col-sm-6"> -->
+    <div *ngFor="let msg of array.reverse() | paginate : {itemsPerPage: size, currentPage: page, totalItems: count}; index as i ">
+        <div style="margin-top: 20px; font-size: 22px;" class="accordion-heading d-flex" id="{{msg.senderName}}">
+            <span class="pull-left up-icon"><i class="fa fa-expand" style="font-size: 20px;"
+                    (click)="showMessage(msg,i)"></i></span>
+            <span style="font-size: 30px;">{{msg.senderName}}</span>
+        </div>
+        <div class="accordian-content" *ngIf="id === i">
+            <div *ngFor="let msgs of msg.message.reverse()" style="margin-top: 20px;">
+                <tr *ngIf="msgs.replyOf"> Reply Of : <label style="color: green;">{{msgs.replyOf}}
+                </label></tr>
+            <tr> Message is : <label
+                    style="color: rgb(29, 216, 100);;margin-left: 8px; font-size: 20px;">{{msgs.receivedMessage}}</label><label
+                    style="vertical-align: text-top; color: rgb(29, 216, 100);margin-left: 8px;font-size: 9px;">{{msgs.time}}</label>
+            </tr>
+        </div>
+        <form #addReplyForm="ngForm" (ngSubmit)="submit(addReplyForm)">
+            <div class="form-group mb-2">
+                <input  type="button" value="Reply"
+                    (click)="openReplyForm(msg.studentuuid,msg.message[msg.message.length-1].receivedMessage,msg.message[msg.message.length-1].messageuuid)"
+                    class="btn btn-primary" style="margin-top: 3mm;">
+            </div>
+        </form>
+        </div>
+    </div>
+    <div *ngIf="array.length > size+1" style="text-align: left; font-size: 1px;">
+        <ul class="pagination justify-content-left">
+            <li class="page-item">
+                <a class="page-link" tabindex="-1" style="font-size: 10px;">
+                    <pagination-controls previousLabel="<" nextLabel=">"
+                        (pageChange)="onMessageChange($event)"></pagination-controls>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div *ngFor="let sendMessages of sendMessagesList.reverse(); index as indexing" style="margin-top: 20px; margin-left: 850px;"
+        class="container col-sm-6" >
+        <div style="margin-top: 20px; font-size: 22px;" class="accordion-heading d-flex" id="{{sendMessages.firstname}}">
+            <span class="pull-right up-icon"><i class="fa fa-expand" style="font-size: 20px;"
+                    (click)="showSendMessage(indexing)"></i></span>
+            <span style="font-size: 30px;">{{sendMessages.firstname}}</span>
+        </div>
+        <div *ngIf="id2 === indexing" class="accordian-content"> 
+            <div *ngFor="let sendMessageData of sendMessages.message " style="margin-top: 20px;">
+            <tr *ngIf="sendMessageData.replymessage">Reply Message Of : <label
+            style="color: brown;margin-left: 8px;">{{sendMessageData.replymessage}}</label></tr>
+    <tr> Message : <label style="color: rgb(29, 216, 100);;margin-left: 8px;">{{sendMessageData.message}}</label>
+        <label
+        style="vertical-align: text-top; color: rgb(29, 216, 100);margin-left: 8px;font-size: 9px;">{{sendMessageData.time}}</label></tr></div>
+    </div>
+</div>
+
+
+    <!-- <div *ngIf = "show" class="col-sm-6">
+    <div class="col-sm-6"><app-replymessage studentuuid="{{receiveruuid}}" studentuuid2="{{uuid}}" message="{{receivedMessage}}" > </app-replymessage></div>
+    </div>
+</div> -->
+
+    <!-- <div *ngIf="showReceiver"><app-message></app-message></div> -->
+    <!-- <div *ngIf = "show" class="col-sm-6">
+<div class="col-sm-6"><app-replymessage studentuuid="{{receiveruuid}}" studentuuid2="{{uuid}}"> </app-replymessage></div>
+</div> -->
+    <!-- <app-replymessage (dataSubmitted)="handleSubmitted($event)">data</app-replymessage> -->
+    <!-- <form #messageForm="ngForm" (ngSubmit)="sendMessage(messageForm)">
+    <div class="form-group mb-2">
+        <label for="message">Enter your Message</label>
+        <textarea type="text" #message="ngModel" (ngModel)="message" name="message" id="message" class="form-control" >Enter text</textarea>
+    </div>
+    <div class="form-group mb-2">
+        <input type="submit" value="Reply" class="btn btn-primary" style="margin-top: 3mm;" >
+    </div> 
+</form> -->

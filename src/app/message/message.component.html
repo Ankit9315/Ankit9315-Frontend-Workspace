@@ -1,0 +1,76 @@
+<div  *ngIf="hideSelector">
+<button type="button" class="close" aria-label="Close" style="float: right; color: red;" mat-dialog-close>
+  <span aria-hidden="true">&times;</span>
+</button>
+<h6 mat-dialog-title>Select  Receiver of Message</h6>
+    
+    <div >
+        <label for="first_name">Select Teacher : </label>
+        <!-- <select #selectTeacher (change)="showTeacher(selectTeacher.value)" id="mySelect">
+            <option value="" selected disabled hidden>Select Teacher</option>
+            <option *ngFor="let teacher of listTeacher" [value]="teacher.teacheruuid">{{teacher.first_name}}</option>
+        </select> -->
+        <!-- <select2 [overlay]="overlay" [data]="listTeacher" [value]="value1" resettable>
+               <option *ngFor="let teacher of listTeacher" [value]="teacher.teacheruuid">{{teacher.first_name}}</option>
+        </select2> -->
+        <!-- <select ng-model="item.name" class="js-example-basic-single">
+            <option *ngFor="let teacher of listTeacher" [value]="teacher.teacheruuid">{{teacher.first_name}}</option>
+        </select> -->
+        <input type="text"
+        (input)="getTeacherNameWord($event)" 
+        style="margin-left: 20px;"
+        name="holderofStudent"
+        [(ngModel)]="searchValue"
+       placeholder="Select Teacher"
+       aria-label="String"
+       matInput
+       [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete" >
+            <mat-option *ngFor="let option of filteredTeacherList" [value]="option.first_name"  (onSelectionChange)='showTeacher(option)'>
+              {{option.first_name + " "+option.last_name}}
+            </mat-option>
+          </mat-autocomplete>
+        <div [hidden]="hideDiv" style="margin-top: 20px;">
+            <div class="form-group mb-2">
+              <label for="authentication" > Select Student : </label>
+              <input style="margin-left: 20px;" [(ngModel)]="searchValue2" type="text" (input)="getStudentNameWord($event)" name="" placeholder="Select Student" aria-label="String" matInput [matAutocomplete]="auto2">
+              <mat-autocomplete #auto2="matAutocomplete" >
+                <mat-option *ngFor="let option2 of filteredStudentList" [value]="option2.first_name"  (onSelectionChange)='receiverStudent(option2)'>
+                  {{option2.first_name + " "+option2.last_name}}
+                </mat-option>
+              </mat-autocomplete>
+              <!-- <select type="text" #authentication="ngModel" (ngModel)="authentication" name="authentication" id="authentication" class="form-control" #selectStudent (change)="receiverStudent(selectStudent.value)" style="margin-left: 20px;">
+                <option value="" selected disabled hidden>Select Student</option>
+                <option *ngFor="let student of students" [value]="student.studentuuid">{{student.first_name}}({{student.emailid}})</option>
+              </select> -->
+            </div>
+        </div>
+    </div>
+    <div class="form-group mb-2" style="margin-top: 3mm;">
+      <input type="submit" value="Select Receiver" class="btn btn-primary" style="margin-left: 3mm; margin-bottom: 3mm;" (click)="messageReceive();" [disabled]="close">
+        <input type="submit" value="cancel" class="btn btn-warning" style="margin-left: 5mm; margin-bottom: 3mm;" (click)="closeMessageDialog()">
+    </div>
+  </div>
+
+  <div *ngIf="hideMessagenger">
+    <div>
+      <i class="fa fa-arrow-left" style="float: left;" (click)="backToPriviousPage()"></i>
+      <button type="button" class="close" aria-label="Close" style="float: right;" mat-dialog-close>
+            <span aria-hidden="true">&times;</span>
+          </button>
+      <h3 style="margin-left: 5mm;"><label *ngIf="senderStudent" style="text-align: center; color: rgb(120, 15, 240); text-transform: uppercase;"></label> Write Your Message to 
+        <label *ngIf="student" style="text-align: center; color: rgb(120, 15, 240); text-transform: uppercase;"></label>: </h3>
+      <!-- <tr>Send Message to : <label *ngIf="senderStudent" style="text-align: center; color: rgb(120, 15, 240); text-transform: uppercase;">   {{senderStudent.first_name}}</label></tr> -->
+      <!-- <tr>Send Message to : <label *ngIf="student" style="text-align: center; color: rgb(120, 15, 240); text-transform: uppercase;">   {{student.first_name}}</label></tr> -->
+      </div>
+      <form #messageForm="ngForm"  (ngSubmit)="sendMessage(messageForm)">
+          <div class="form-group mb-2">
+              <label for="message" style="color: green;margin-top: 5px;">Enter your Message</label>
+              <textarea maxlength="100" type="text"  [(ngModel)]="message" name="message" id="message" class="form-control" placeholder="Enter Your Message here">Enter text</textarea>
+          </div>
+          <div class="form-group mb-2">
+              <input type="submit" value="Send" class="btn btn-primary" style="margin-top: 3mm;"  >
+              <button class="btn btn-danger" style="margin-top:3mm;margin-left: 3mm;" (click)="clearMessage()">Clear</button>
+          </div> 
+      </form>
+  </div>

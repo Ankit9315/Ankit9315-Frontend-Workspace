@@ -1,0 +1,47 @@
+<h1 style="text-align: center;margin-top: 2mm;text-transform: uppercase;">Teachers</h1>
+<div style="text-align: right;margin-bottom: 10px;">
+  <button (click)="makePdf()" style="margin-right: 10px; border: 0px;  background-color: rgb(197, 199, 183)">Export to PDF</button>
+  <button (click)="generateCSV() " style="border: 0px; background-color: rgb(197, 199, 183);">Export to CSV</button>
+</div>
+<div>
+    <table style="align-items: center;" class="table table-bordered">
+        <thead>
+            <tr>
+                 <!-- <th>Teacher UUID</th> -->
+                 <th>Teacher First Name<button style='font-size:6px;margin-left: 5px;border: 0px;vertical-align:middle;' (click) ="sortByCol('first_name')" ><fa-icon [icon]="faAngleDown"></fa-icon></button></th>
+                 <th>Teacher Last Name<button style='font-size:6px ;margin-left: 5px;border: 0px;vertical-align:middle' (click) ="sortByCol('last_name')" ><fa-icon [icon]="faAngleDown"></fa-icon></button></th>
+                 <th>Gender</th>
+                 <th>Mobile Number</th>
+                 <th>Email</th>
+                 <th>Student</th>
+                 <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor = "let teacher of teacherList | paginate : {itemsPerPage: size,
+                currentPage: page,
+                totalItems: count}">
+                <!-- <td>{{teacher.teacheruuid}}</td> -->
+                <td>{{teacher.first_name}}</td>
+                <td>{{teacher.last_name}}</td>
+                <td>{{teacher.gender}}</td>
+                <td>{{teacher.mobilenumber}}</td>
+                <td>{{teacher.email}}</td>
+                <td style="text-align: center;"><button type="button" (click)="getTeacher(teacher.teacheruuid)" class="btn" style="background-color: darkturquoise;color: white;">View Student</button></td>
+                <td style="text-align: center;">
+                  <button type="button" class="btn btn-primary" (click)="updateTeacher(teacher.teacheruuid)" style="color:white">Edit</button>
+                  <button type="button" (click)="deleteTeacher(teacher.teacheruuid)" class="btn btn-danger" style="margin-left: 5px;">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div>
+        <ul class="pagination justify-content-center" style="align-content: center;">
+          <li class="page-item">
+            <a class="page-link" tabindex="-1" style="color:black">
+              <pagination-controls previousLabel="Previous" nextLabel="Next" (pageChange)="onTableDataChange($event)"></pagination-controls>
+            </a>
+          </li>
+        </ul>
+      </div>
+</div>

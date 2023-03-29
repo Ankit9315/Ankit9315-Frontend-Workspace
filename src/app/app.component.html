@@ -1,0 +1,29 @@
+
+<h1 style="text-align: center; background-color:white; color: black; text-transform: uppercase;"  > {{title}}</h1>
+<nav class="navbar navbar-expand-sm" style="background-color:black">
+    <ul class="navbar-nav" style="text-align: left;" >
+        <li class="nav-item" style="text-align: left;margin-left: 2mm;">
+            <a routerLink="add-student" rooterLinkActive="active" class="nav-link" style="color: white;text-align: left;text-decoration: solid;">Add Student</a>
+        </li>
+        <li class="nav-item" style="text-align: right;margin-left: 16mm;" >
+            <a routerLink="students" rooterLinkActive="active" class="nav-link" style=" color: white">Student List</a>
+        </li>
+        <li class="nav-item" style="text-align: right ;margin-left: 16mm;">
+            <a routerLink="teacherList" rooterLinkActive="active" class="nav-link" style="color: white">Teacher List</a>
+        </li>
+        <li class="nav-item" style="text-align: right ;margin-left: 16mm;">
+            <a routerLink="add-teacher" rooterLinkActive="active" class="nav-link" style="color: white" >Add Teacher</a>
+        </li>
+        <li class="nav-item" style="text-align: right ;margin-left: 16mm;">
+            <a  (click)="openDialog()" class="nav-link" style="color: white" >Student Login</a>
+        </li>
+    </ul>
+</nav>
+<div class="container">
+    <router-outlet></router-outlet>
+</div>
+<!-- <footer style="text-align: center; color: rgb(255, 0, 0); background-color: blue; text-transform: uppercase; background-size: 60px;">All rights reserved</footer> -->
+<!-- <app-list-student></app-list-student> -->
+<!-- <a class="button" href="D:\Angular\crud-application\src\app\add-student\add-student.component.html">HTML</a> -->
+<!-- <app-add-student></app-add-student> 
+<app-list-student></app-list-student> -->

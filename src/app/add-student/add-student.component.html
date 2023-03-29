@@ -1,0 +1,57 @@
+
+ <div class="container" style="margin-top: 3mm;">
+    <div>
+        <h1 style="text-align: center;">Create Student</h1>
+    </div>
+    <div class="card p-4">
+        <form #addStudentForm="ngForm" (ngSubmit)="saveStudent(addStudentForm)">
+            <div class="form-group mb-2">
+                <label for="first_name" style="font-size:17px;margin-bottom: 5px;margin-top: 5px;">First Name</label>
+                <input type="text" #first_name="ngModel" (ngModel)="first_name" name="first_name" id="first_name" class="form-control"  placeholder="First Name" required minlength="5">
+                <div *ngIf="first_name.invalid && (first_name.dirty || first_name.touched)" class="alert">
+                    <div *ngIf="first_name.errors?.['required']">
+                        First Name required.
+                    </div>
+                    <div *ngIf="first_name.errors?.['minlength']">
+                        First name must have 5 letters.
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mb-2">
+                <label for="last_name" style="font-size:17px;margin-bottom: 5px;margin-top: 5px;">Last Name</label>
+                <input type="text" #last_name="ngModel" (ngModel)="last_name" name="last_name" id="last_name" class="form-control" placeholder="Last Name" required minlength="5">
+                <div *ngIf="last_name.invalid && (last_name.dirty || last_name.touched)" class="alert">
+                    <div *ngIf="last_name.errors?.['required']">
+                        Last Name required.
+                    </div>
+                    <div *ngIf="last_name.errors?.['minlength']">
+                        Last name must have 5 letters.
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mb-2">
+                <label for="date_of_birth" style="font-size:17px;margin-bottom: 5px;margin-top: 5px;">Date Of Birth</label>
+                <input type="date" #date_of_birth (ngModel)="date_of_birth" name="date_of_birth" id="date_of_birth" class="form-control" placeholder="Date Of Birth" min="1970-01-01" max={{this.myDate}} required>
+            </div>
+            <div class="form-group">
+                <label for="mobilenumber" style="font-size:17px;margin-bottom: 5px;margin-top: 5px;">Mobile Number</label>
+                <input type="tel" #mobilenumber (ngModel)="mobilenumber" name="mobilenumber" id="mobilenumber" class="form-control" placeholder="Mobile Number" pattern="[7-9]{1}[0-9]{9}" required>
+            </div>
+            <div class="form-group mb-2">
+                <label for="emailid" style="font-size:17px;margin-bottom: 5px;margin-top: 5px;">Email Id</label>
+                <input type="email" #emailid="ngModel" (ngModel)="emailid" name="emailid" id="emailid" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" placeholder="emailid" size="30" required>
+                <div *ngIf="emailid.invalid && (emailid.touched || emailid.dirty)">
+                    <div *ngIf="emailid.errors?.['pattern']">
+                        must follow pattern
+                    </div>
+                    <div *ngIf="emailid.errors?.['size']">
+                        size is big
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mb-2">
+                <input type="submit" value="Add Student" class="btn btn-primary" style="margin-top: 3mm;">
+            </div>
+        </form>
+    </div>
+ </div>
